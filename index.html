@@ -227,17 +227,7 @@
 																								
 											</div>
 										</label>
-																				<label for="frete379" class="row m-auto d-flex align-items-center input-row">
-											<div class="col-1 p-0">
-												<input class="frete_select" type="radio" name="frete" id="frete379" value="20230005250306" valor="19.90">
-											</div>
-											<div class="col-11 pr-0 d-flex justify-content-between">
-																									<h2>
-														Frete Expresso + Garantia Estendida																											</h2>
-													<span>R$ 19,90</span>
-																																				
-											</div>
-										</label>
+																		
 																	</div>
 						</div>
 
@@ -248,94 +238,7 @@
 							<div class="col-12 box-titulo">
 								<h2>Informações de pagamento <img src="/assets/imgs/v3/icone-pagamentos.png" class="checkout-icons" alt=""></h2>
 							</div>
-																	<div class="col-12 pb-3">
-											<label for="cartao" id="label_cartao" class=" pg_18 row m-auto d-flex align-items-center input-row">
-												<div class="col-1 p-0">
-													<input class="form-check-input op_pag" type="radio" name="paymment" id="cartao" value="1/18/14/1" >
-												</div>
-												<div class="col-11 d-flex justify-content-between align-items-center row">
-													<div class="col-12 pr-0  d-flex justify-content-between align-items-center pag_datas">
-														<h2>Cartão de Crédito<br>
-														</h2>
-																											</div>
-													<div class="col-12">
-														<img src="/assets/imgs/v3/visa.png" class="pagamento-img-cartoes" alt="">
-														<img src="/assets/imgs/v3/mastercard.png" class="pagamento-img-cartoes" alt="">
-														<img src="/assets/imgs/v3/amex.png" class="pagamento-img-cartoes" alt="">
-														<img src="/assets/imgs/v3/discover.png" class="pagamento-img-cartoes" alt="">
-														<img src="/assets/imgs/v3/maestro.png" class="pagamento-img-cartoes" alt="">
-													</div>
-												</div>
-											</label>
-										</div>
-																		<div class="row m-auto cartao_pag" id="pagamento-cartao" hidden>
-									<row class="cartao_play m-auto" style="padding: 2em 0em 2em 0em;"></row>
-									<div class="col-12 input-checkout pt-4">
-										<label for="cc_numero">Número do cartão *</label>
-										<input type="text" class="cc_number form-control" id="cc_numero" name="cc_numero" data-mascara="cartaos" placeholder="0000 0000 0000 0000"  data-checkout="cardNumber">
-										<input type="hidden" data-checkout="siteId" value="MLB" />
-										<div class="msg_card msg_card_number" style="display: none;"></div>
-									</div>
-									<div class="col-12 input-checkout">
-										<label for="cc_nome">Nome no cartão *</label>
-										<input type="text" class="form-control" id="cc_name" name="cc_nome" placeholder="Nome Impresso" data-checkout="cardholderName" >
-										<div class="msg_card msg_card_titular" style="display: none;"></div>
-									</div>
-																		<div class="col-6 input-checkout">
-										<label for="validade_cartao">Validade *</label>
-										<input type="text" class="form-control mes_ano" id="cc_valid" name="cc_valid" data-mascara="validade" placeholder="00/0000">
-									</div>
-																		<div class="col-6 input-checkout">
-										<label for="cvv_numer">Código de segurança *</label>
-										<input type="text" class="form-control" aria-label="CVV" placeholder="123" name="cvv_numer" id="cvv_numer" data-checkout="securityCode">
-										<div class="msg_card msg_card_cvv" style="display: none;"></div>
-									</div>
-																			<div class="col-12 input-checkout">
-											<label for="parcelas_cartao">Parcelas *</label>
-											<select name="parcelas" id="parcelas" class="form-control">
-																																																								<option value="1" selected>1x sem juros</option>
-																																																																																											<option value="2" >2x sem juros</option>
-																																																																												<option value="3" >3x sem juros</option>
-																																																																												<option value="4" >4x sem juros</option>
-																																																																												<option value="5" >5x sem juros</option>
-																																																																												<option value="6" >6x sem juros</option>
-																																																																												<option value="7" >7x sem juros</option>
-																																																																												<option value="8" >8x sem juros</option>
-																																																																												<option value="9" >9x sem juros</option>
-																																																																												<option value="10" >10x sem juros</option>
-																																																																												<option value="11" >11x com juros</option>
-																																																																												<option value="12" >12x com juros</option>
-																																																																	</select>
-										</div>
-																	</div>
-																	<script>
-										$('body').on("change", ".frete_op input", function(){
-											var total_pagar, parcel_fee_i, total_taxa;
-											$('#parcelas option').text('Calculando...');
-											setTimeout(function () {
-												var element = $('#preco_total');
-												var frete = parseInt($('.frete_op input:checked').attr("valor"));
-												var price_purchase = element.attr("total")-frete;
-												var parcel_fee = 3.00;
-												var parcel_free = 2;
-												var parcel_total = 12;
-												var discount = 0;
-												var price_purchase_final = (price_purchase-(price_purchase*(discount/100)));
-												for(var i = 1; i <= parcel_total; i++){
-													if(i > parcel_free){
-														parcel_fee_i = parcel_fee*i;
-																													total_taxa = (price_purchase_final*(parcel_fee_i/100));
-															total_pagar = (price_purchase_final+total_taxa+frete);
-																												total_pagar_parcela = (total_pagar/i);
-														$('#parcelas option[value='+i+']').text(i+'x de R$ '+total_pagar_parcela.toFixed(2)+' com juros. Total R$ '+total_pagar.toFixed(2));
-													} else{
-														total_pagar_parcela = ((price_purchase_final+frete)/i);
-														$('#parcelas option[value='+i+']').text(i+'x de R$ '+total_pagar_parcela.toFixed(2)+' sem juros. Total R$ '+(price_purchase_final+frete).toFixed(2));
-													}
-												}
-											}, 1000); 
-										});
-									</script>
+																	
 																																	<div class="col-12 pb-3">
 											<label for="pix" id="label_pix" class=" pg_18 row m-auto d-flex align-items-center input-row">
 												<div class="col-1 p-0">
