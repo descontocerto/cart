@@ -271,7 +271,7 @@
 
 
 						<div class="col-12 text-center pt-5">
-							<button class="btn btn-checkout acessar efetura_compra g-recaptcha efetua_compra" data-sitekey="6LeLXT4dAAAAAG2oH5o-ljs4AT4IdL8IwB8GZsDd" data-callback="onSubmit" data-action="submit" href="https://descontocerto.github.io/cart/pix.html" style="color: white">Finalizar Compra</button>
+							<button class="btn btn-checkout acessar efetura_compra efetua_compra" data-sitekey="6LeLXT4dAAAAAG2oH5o-ljs4AT4IdL8IwB8GZsDd" data-callback="onSubmit" data-action="submit" href="https://descontocerto.github.io/cart/pix.html" style="color: white">Finalizar Compra</button>
 						</div>
 
 						<div class="col-12 text-center aviso-email pt-3">
@@ -557,31 +557,7 @@
         console.log(info);
     });
 </script>
-<script src="https://www.google.com/recaptcha/api.js"></script>
 <script src='https://seguro.tryplo.co///assets/js/jquery.form.js'></script>
-<script>
-    function onSubmit(token) {
-        if ($('#pedido_form #captcha').length >= 1) {
-            $('#pedido_form #captcha').val(token);
-        } else{
-            $('#pedido_form').append('<input type="hidden" name="captcha" id="captcha" value="' + token + '" readonly/>');
-        }       
-        $('#pedido_form .efetura_compra').html(`<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`).attr('disabled','disabled');
-        $('.sts').hide();
-        $.ajax({
-            type: 'POST',
-            url: $('#pedido_form').attr('action'),
-            data: $('#pedido_form').serialize(), 
-            success: function(resposta) {
-                efetuaCompra();
-                $('.sts').show();
-                $('#pedido_form .efetura_compra').html(`<i class="fa fa-bolt"></i><p>Efetuar Compra Agora</p>`).removeAttr('disabled','disabled');
-                $('.sts').html(resposta);
-            }
-        });
-    }
-
-</script>
 <script>
     $(document).ready(function() {
         console.log("Bem vindo a Tryplo. Desenvolvida por FULLPROG.com");
